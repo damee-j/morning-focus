@@ -12,12 +12,14 @@ import type { PreviewScheduleBlock } from "@shared/schema";
 import ConfirmDialog from "@/components/ConfirmDialog";
 import { SoftInput } from "@/components/SoftInput";
 import { cn } from "@/lib/utils";
+import { todayKstYmd } from "@/lib/kst";
 
 function tomorrowYmd() {
-  const d = new Date();
-  d.setDate(d.getDate() + 1);
+  const today = todayKstYmd();
+  const [y, m, d] = today.split("-").map(Number);
+  const tomorrow = new Date(Date.UTC(y, m - 1, d + 1));
   const pad = (n: number) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  return `${tomorrow.getUTCFullYear()}-${pad(tomorrow.getUTCMonth() + 1)}-${pad(tomorrow.getUTCDate())}`;
 }
 
 export default function Schedule() {

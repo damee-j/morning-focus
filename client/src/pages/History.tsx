@@ -148,9 +148,10 @@ function HistoryItem({
         >
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm font-semibold text-foreground/95">{fmtDateK(item.date)}</span>
+            <span className="text-xs text-muted-foreground" data-testid={`history-created-at-${item.id}`}>{fmtTime(item.createdAt)}</span>
             {item.topTask ? (
               <span className="truncate text-xs text-muted-foreground">
-                {item.topTask}
+                · {item.topTask}
               </span>
             ) : null}
           </div>
